@@ -1,0 +1,214 @@
+[gd_scene format=3 uid="uid://cc23548oy2dlm"]
+
+[ext_resource type="Texture2D" uid="uid://ddxoy11ss6l5r" path="res://assets/textures/star_background.png" id="1_uwrxv"]
+[ext_resource type="Texture2D" uid="uid://di0oy04lrhp3h" path="res://assets/planets/planet09.png" id="2_gee14"]
+[ext_resource type="PackedScene" uid="uid://cvhty6unj6v6s" path="res://scenes/player.tscn" id="2_yqjtg"]
+[ext_resource type="PackedScene" uid="uid://cwtm13ws3ca17" path="res://scenes/collection_area.tscn" id="4_lbhrr"]
+[ext_resource type="Texture2D" uid="uid://byaxgvy8gi3tt" path="res://assets/planets/planet00.png" id="5_p57ef"]
+[ext_resource type="Texture2D" uid="uid://ccbsct3c802um" path="res://assets/planets/planet07.png" id="6_dinhu"]
+[ext_resource type="Texture2D" uid="uid://h3a74ny00mwi" path="res://assets/planets/planet04.png" id="6_u5sy4"]
+[ext_resource type="Texture2D" uid="uid://bima04vmm3avt" path="res://assets/planets/planet06.png" id="7_kvuet"]
+[ext_resource type="Texture2D" uid="uid://cpgd7uq6egb1v" path="res://assets/planets/planet02.png" id="7_u5sy4"]
+[ext_resource type="Texture2D" uid="uid://e27tnd35x81j" path="res://assets/planets/planet05.png" id="8_trtic"]
+[ext_resource type="Texture2D" uid="uid://n11pq1j1h0u7" path="res://assets/planets/planet03.png" id="9_ir15t"]
+[ext_resource type="Script" uid="uid://cf1g1li1mms5g" path="res://scripts/asteroid_spawner.gd" id="11_spawn"]
+[ext_resource type="Script" path="res://scripts/game.gd" id="19_game"]
+[ext_resource type="Script" path="res://scripts/power_spawner.gd" id="20_spawner"]
+[ext_resource type="Shader" uid="uid://c2a7s4opjw2ib" path="res://shaders/map_atmosphere.gdshader" id="12_shader"]
+[ext_resource type="Texture2D" uid="uid://bubpdi0reoa27" path="res://assets/planets/planet01.png" id="13_planet01"]
+[ext_resource type="PackedScene" uid="uid://dmb53d732gifv" path="res://scenes/hud.tscn" id="14_hud"]
+[ext_resource type="Script" uid="uid://g3fhhnrd8thc" path="res://scripts/level_manager.gd" id="15_level"]
+[ext_resource type="PackedScene" path="res://scenes/end_screen.tscn" id="16_end"]
+[ext_resource type="PackedScene" path="res://scenes/pause_menu.tscn" id="17_pause"]
+[ext_resource type="PackedScene" path="res://scenes/objective_banner.tscn" id="18_banner"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_atmosphere"]
+frequency = 0.012
+fractal_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_atmosphere"]
+noise = SubResource("FastNoiseLite_atmosphere")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_atmosphere"]
+shader = ExtResource("12_shader")
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_atmosphere")
+shader_parameter/show_layers = true
+shader_parameter/show_wall = true
+shader_parameter/center = Vector2(0, 0)
+shader_parameter/edge_radius = 1505.0
+shader_parameter/layer1_dist = 480.0
+shader_parameter/layer2_dist = 270.0
+shader_parameter/wall_dist = 10.0
+shader_parameter/layer1_wobble = 160.0
+shader_parameter/layer2_wobble = 110.0
+shader_parameter/wall_wobble = 30.0
+shader_parameter/edge_softness = 5.0
+shader_parameter/layer1_color = Color(0.3, 0.8, 0.65, 1)
+shader_parameter/layer1_alpha = 0.12
+shader_parameter/layer2_color = Color(0.12, 0.45, 0.4, 1)
+shader_parameter/layer2_alpha = 0.28
+shader_parameter/wall_color = Color(0.03, 0.05, 0.07, 1)
+shader_parameter/rim_color = Color(0.5, 1, 0.8, 1)
+shader_parameter/rim_alpha = 0.35
+shader_parameter/rim_width = 6.0
+shader_parameter/void_blob_color = Color(0.1, 0.25, 0.25, 1)
+shader_parameter/void_blob_alpha = 0.22
+shader_parameter/hit_pos = Vector2(0, 0)
+shader_parameter/hit_progress = 1.0
+shader_parameter/hit_strength = 0.0
+shader_parameter/hit_reach = 750.0
+shader_parameter/hit_bulge = 34.0
+shader_parameter/noise_scale = 0.0007
+shader_parameter/scroll_speed = Vector2(0.01, 0.006)
+
+[node name="Game" type="Node2D" unique_id=218763115]
+script = ExtResource("19_game")
+metadata/_edit_vertical_guides_ = [-1500.0, 1500.0]
+metadata/_edit_horizontal_guides_ = [-1500.0, 1500.0]
+
+[node name="Background" type="Node2D" parent="." unique_id=2081840179]
+
+[node name="Stars" type="Sprite2D" parent="Background" unique_id=691431653]
+texture_repeat = 2
+position = Vector2(640, 360)
+texture = ExtResource("1_uwrxv")
+region_enabled = true
+region_rect = Rect2(0, 0, 10000, 10000)
+metadata/_edit_lock_ = true
+
+[node name="Atmosphere" type="Polygon2D" parent="Background/Stars" unique_id=159997164 groups=["atmosphere"]]
+material = SubResource("ShaderMaterial_atmosphere")
+position = Vector2(-640, -360)
+polygon = PackedVector2Array(-4700, -4700, 4700, -4700, 4700, 4700, -4700, 4700)
+
+[node name="Planet09" type="Sprite2D" parent="Background" unique_id=1549588104]
+modulate = Color(0.68734396, 0.68734396, 0.68734396, 0.69803923)
+position = Vector2(1898.4144, -988.2173)
+scale = Vector2(1.6962082, 1.6962082)
+texture = ExtResource("2_gee14")
+metadata/_edit_lock_ = true
+
+[node name="Planet00" type="Sprite2D" parent="Background" unique_id=1655233696]
+modulate = Color(0.5370987, 0.5370987, 0.5370987, 1)
+position = Vector2(-518.6294, -701.84485)
+texture = ExtResource("5_p57ef")
+metadata/_edit_lock_ = true
+
+[node name="Planet04" type="Sprite2D" parent="Background" unique_id=1377966047]
+self_modulate = Color(0.37222746, 0.37222746, 0.37222746, 0.55200005)
+position = Vector2(30.281738, -1089.6499)
+scale = Vector2(0.13513413, 0.13513413)
+texture = ExtResource("6_u5sy4")
+metadata/_edit_lock_ = true
+
+[node name="Planet02" type="Sprite2D" parent="Background" unique_id=460220479]
+modulate = Color(0.66590637, 0.66590637, 0.66590637, 0.38431373)
+position = Vector2(751.3391, 883.0558)
+scale = Vector2(0.40070724, 0.40070724)
+texture = ExtResource("7_u5sy4")
+metadata/_edit_lock_ = true
+
+[node name="Planet10" type="Sprite2D" parent="Background" unique_id=1425040112]
+position = Vector2(-806.372, 1016.85333)
+scale = Vector2(0.011104808, 0.011104808)
+texture = ExtResource("6_dinhu")
+metadata/_edit_lock_ = true
+
+[node name="Planet07" type="Sprite2D" parent="Background" unique_id=731328954]
+modulate = Color(0.29443026, 0.29443026, 0.29443026, 0.7176471)
+position = Vector2(-950.12994, 1051.3486)
+scale = Vector2(0.022788627, 0.022788627)
+texture = ExtResource("6_dinhu")
+metadata/_edit_lock_ = true
+
+[node name="Planet06" type="Sprite2D" parent="Background" unique_id=1203019775]
+modulate = Color(0.76559544, 0.76559544, 0.76559544, 1)
+position = Vector2(2384.9424, 2116.1138)
+texture = ExtResource("7_kvuet")
+metadata/_edit_lock_ = true
+
+[node name="Planet05" type="Sprite2D" parent="Background" unique_id=1447690509]
+modulate = Color(0.5203482, 0.5203482, 0.5203482, 0.8)
+position = Vector2(-1320.0306, 391.3252)
+scale = Vector2(0.50244486, 0.50244486)
+texture = ExtResource("8_trtic")
+metadata/_edit_lock_ = true
+
+[node name="Planet08" type="Sprite2D" parent="Background" unique_id=1415478937]
+modulate = Color(1.0825998, 1.0825998, 1.0825998, 1)
+position = Vector2(42.937225, 1680.5867)
+scale = Vector2(0.537484, 0.537484)
+texture = ExtResource("6_u5sy4")
+metadata/_edit_lock_ = true
+
+[node name="Planet03" type="Sprite2D" parent="Background" unique_id=258376142]
+modulate = Color(0.39424562, 0.39424562, 0.39424562, 1)
+position = Vector2(-824.36035, 1139.5521)
+scale = Vector2(0.20153616, 0.20153616)
+texture = ExtResource("9_ir15t")
+metadata/_edit_lock_ = true
+
+[node name="PlanetVoid1" type="Sprite2D" parent="Background" unique_id=1285738036]
+modulate = Color(0.3474588, 0.3474588, 0.3474588, 0.48235294)
+position = Vector2(-1320, -1280)
+scale = Vector2(0.28, 0.28)
+texture = ExtResource("13_planet01")
+metadata/_edit_lock_ = true
+
+[node name="PlanetVoid2" type="Sprite2D" parent="Background" unique_id=2026014807]
+modulate = Color(0.39445034, 0.39445034, 0.39445034, 1)
+position = Vector2(845.9448, -1472.6597)
+scale = Vector2(0.22, 0.22)
+texture = ExtResource("9_ir15t")
+metadata/_edit_lock_ = true
+
+[node name="PlanetVoid3" type="Sprite2D" parent="Background" unique_id=222277231]
+modulate = Color(0.5176789, 0.5176789, 0.5176789, 0.6392157)
+position = Vector2(-2061.7998, 746.83057)
+scale = Vector2(0.32, 0.32)
+texture = ExtResource("7_u5sy4")
+metadata/_edit_lock_ = true
+
+[node name="PlanetVoid4" type="Sprite2D" parent="Background" unique_id=178241723]
+modulate = Color(0.2679032, 0.2679032, 0.2679032, 0.58431375)
+position = Vector2(-1380, 1330)
+scale = Vector2(0.18, 0.18)
+texture = ExtResource("8_trtic")
+metadata/_edit_lock_ = true
+
+[node name="Gameplay" type="Node2D" parent="." unique_id=1741734647]
+
+[node name="Asteroids" type="Node2D" parent="Gameplay" unique_id=1088645024]
+script = ExtResource("11_spawn")
+
+[node name="PowerSpawner" type="Node" parent="Gameplay"]
+script = ExtResource("20_spawner")
+
+[node name="MapBounds" type="StaticBody2D" parent="Gameplay" unique_id=1977827487 groups=["map_bounds"]]
+z_index = 10
+metadata/_edit_lock_ = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Gameplay/MapBounds" unique_id=1599826924]
+visible = false
+polygon = PackedVector2Array(0, -1505, -389.6986, -1453.9833, -752.52344, -1303.4453, -1064.2913, -1064.2024, -1303.4297, -752.5703, -1453.8047, -389.53906, -1505.1149, 0.015627861, -1453.8203, 389.53125, -1303.4375, 752.5469, -1064.25, 1064.2656, -752.5469, 1303.4297, -389.49582, 1453.7883, -0.0008172989, 1505.0737, 389.5078, 1453.8203, 752.53845, 1303.4556, 1064.28, 1064.26, 1303.486, 752.5951, 1453.8035, 389.5359, 1505.0859, -0.0078125, 1453.7969, -389.5703, 1303.4531, -752.5078, 1064.2623, -1064.2654, 752.53906, -1303.4609, 390, -1454, 0, -1505, 196, -4640, 5540, -4565, 5614, 5343, -4333, 5315, -4332, -4594, 196, -4640)
+metadata/_edit_lock_ = true
+
+[node name="CollectionArea" parent="Gameplay" unique_id=2124246774 instance=ExtResource("4_lbhrr")]
+z_index = 10
+metadata/_edit_lock_ = true
+
+[node name="Player" parent="Gameplay" unique_id=1136005801 instance=ExtResource("2_yqjtg")]
+position = Vector2(382, 179)
+lock_rotation = true
+
+[node name="HUD" parent="." unique_id=566557925 instance=ExtResource("14_hud")]
+
+[node name="LevelManager" type="Node" parent="." unique_id=906766913 groups=["level_manager"]]
+script = ExtResource("15_level")
+
+[node name="EndScreen" parent="." unique_id=760713186 instance=ExtResource("16_end")]
+
+[node name="PauseMenu" parent="." unique_id=436977756 instance=ExtResource("17_pause")]
+
+[node name="ObjectiveBanner" parent="." unique_id=1934577577 instance=ExtResource("18_banner")]

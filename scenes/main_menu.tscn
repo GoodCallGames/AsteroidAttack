@@ -1,0 +1,265 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_menu"]
+[ext_resource type="Texture2D" uid="uid://ddxoy11ss6l5r" path="res://assets/textures/star_background.png" id="2_stars"]
+[ext_resource type="Texture2D" uid="uid://di0oy04lrhp3h" path="res://assets/planets/planet09.png" id="3_p09"]
+[ext_resource type="Texture2D" uid="uid://e27tnd35x81j" path="res://assets/planets/planet05.png" id="4_p05"]
+[ext_resource type="Texture2D" uid="uid://n11pq1j1h0u7" path="res://assets/planets/planet03.png" id="5_p03"]
+[ext_resource type="Texture2D" uid="uid://c1ogfdb1ouesk" path="res://assets/textures/green_ship.png" id="6_ship"]
+[ext_resource type="FontFile" uid="uid://urot3nto57vw" path="res://assets/fonts/PixeloidSans-Bold.otf" id="7_bold"]
+[ext_resource type="FontFile" uid="uid://krr6xb15eir1" path="res://assets/fonts/PixeloidSans.otf" id="8_reg"]
+[ext_resource type="PackedScene" path="res://scenes/settings_menu.tscn" id="9_settings"]
+[ext_resource type="PackedScene" path="res://scenes/player_setup.tscn" id="10_setup"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_primary"]
+content_margin_left = 36.0
+content_margin_top = 14.0
+content_margin_right = 36.0
+content_margin_bottom = 16.0
+bg_color = Color(0.85, 0.45, 1, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_primary_hover"]
+content_margin_left = 36.0
+content_margin_top = 14.0
+content_margin_right = 36.0
+content_margin_bottom = 16.0
+bg_color = Color(0.93, 0.6, 1, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 1, 1, 0.9)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_secondary"]
+content_margin_left = 36.0
+content_margin_top = 12.0
+content_margin_right = 36.0
+content_margin_bottom = 14.0
+bg_color = Color(0.1, 0.12, 0.18, 0.85)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.5, 1, 0.8, 0.5)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_secondary_hover"]
+content_margin_left = 36.0
+content_margin_top = 12.0
+content_margin_right = 36.0
+content_margin_bottom = 14.0
+bg_color = Color(0.18, 0.24, 0.3, 0.95)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.5, 1, 0.8, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_menu")
+
+[node name="Sky" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.165, 0.176, 0.216, 1)
+
+[node name="World" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(640, 360)
+
+[node name="Stars" type="Sprite2D" parent="World"]
+texture_repeat = 2
+texture = ExtResource("2_stars")
+region_enabled = true
+region_rect = Rect2(0, 0, 4000, 3000)
+
+[node name="PlanetBig" type="Sprite2D" parent="World"]
+modulate = Color(0.78, 0.78, 0.78, 0.85)
+position = Vector2(540, -270)
+scale = Vector2(1.0, 1.0)
+texture = ExtResource("3_p09")
+
+[node name="PlanetSmall" type="Sprite2D" parent="World"]
+modulate = Color(0.6, 0.6, 0.6, 1)
+position = Vector2(-560, 330)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("4_p05")
+
+[node name="PlanetTiny" type="Sprite2D" parent="World"]
+modulate = Color(0.7, 0.7, 0.7, 1)
+position = Vector2(590, 270)
+scale = Vector2(0.22, 0.22)
+texture = ExtResource("5_p03")
+
+[node name="Drifters" type="Node2D" parent="World"]
+unique_name_in_owner = true
+
+[node name="Ufo" type="Sprite2D" parent="World"]
+unique_name_in_owner = true
+position = Vector2(380, 40)
+scale = Vector2(1.7, 1.7)
+texture = ExtResource("6_ship")
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 120
+theme_override_constants/margin_top = 60
+theme_override_constants/margin_right = 60
+theme_override_constants/margin_bottom = 60
+
+[node name="Column" type="VBoxContainer" parent="Margin"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="TitleTop" type="Label" parent="Margin/Column"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.5, 1, 0.8, 1)
+theme_override_colors/font_outline_color = Color(0.05, 0.08, 0.1, 0.9)
+theme_override_constants/outline_size = 14
+theme_override_fonts/font = ExtResource("7_bold")
+theme_override_font_sizes/font_size = 104
+text = "ASTEROID"
+
+[node name="TitleBottom" type="Label" parent="Margin/Column"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.9, 0.55, 1, 1)
+theme_override_colors/font_outline_color = Color(0.08, 0.04, 0.12, 0.9)
+theme_override_constants/outline_size = 14
+theme_override_fonts/font = ExtResource("7_bold")
+theme_override_font_sizes/font_size = 104
+text = "ATTACK"
+
+[node name="Tagline" type="Label" parent="Margin/Column"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.88, 0.82, 1)
+theme_override_fonts/font = ExtResource("8_reg")
+theme_override_font_sizes/font_size = 26
+text = "Herd them all into the zone before time runs out"
+
+[node name="Spacer" type="Control" parent="Margin/Column"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Buttons" type="VBoxContainer" parent="Margin/Column"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 14
+
+[node name="Play" type="Button" parent="Margin/Column/Buttons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(340, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.05, 0.15, 1)
+theme_override_colors/font_focus_color = Color(0.1, 0.05, 0.15, 1)
+theme_override_colors/font_hover_color = Color(0.1, 0.05, 0.15, 1)
+theme_override_colors/font_pressed_color = Color(0.1, 0.05, 0.15, 1)
+theme_override_fonts/font = ExtResource("7_bold")
+theme_override_font_sizes/font_size = 36
+theme_override_styles/focus = SubResource("StyleBoxFlat_primary_hover")
+theme_override_styles/hover = SubResource("StyleBoxFlat_primary_hover")
+theme_override_styles/normal = SubResource("StyleBoxFlat_primary")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_primary_hover")
+text = "PLAY"
+
+[node name="Settings" type="Button" parent="Margin/Column/Buttons"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.95, 0.9, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("7_bold")
+theme_override_font_sizes/font_size = 28
+theme_override_styles/focus = SubResource("StyleBoxFlat_secondary_hover")
+theme_override_styles/hover = SubResource("StyleBoxFlat_secondary_hover")
+theme_override_styles/normal = SubResource("StyleBoxFlat_secondary")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_secondary_hover")
+text = "SETTINGS"
+
+[node name="Quit" type="Button" parent="Margin/Column/Buttons"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.95, 0.9, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("7_bold")
+theme_override_font_sizes/font_size = 28
+theme_override_styles/focus = SubResource("StyleBoxFlat_secondary_hover")
+theme_override_styles/hover = SubResource("StyleBoxFlat_secondary_hover")
+theme_override_styles/normal = SubResource("StyleBoxFlat_secondary")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_secondary_hover")
+text = "QUIT"
+
+[node name="Hint" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 120.0
+offset_top = -52.0
+offset_right = 760.0
+offset_bottom = -20.0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.6, 0.72, 0.68, 0.8)
+theme_override_fonts/font = ExtResource("8_reg")
+theme_override_font_sizes/font_size = 18
+text = "Arrow keys or D-pad to choose   |   Enter or A to select"
+
+[node name="SettingsMenu" parent="." instance=ExtResource("9_settings")]
+
+[node name="PlayerSetup" parent="." instance=ExtResource("10_setup")]
+layout_mode = 1
+
+[node name="Fade" type="ColorRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.02, 0.03, 0.06, 1)

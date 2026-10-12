@@ -1,0 +1,99 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/setup_slot.gd" id="1_slot"]
+[ext_resource type="FontFile" uid="uid://urot3nto57vw" path="res://assets/fonts/PixeloidSans-Bold.otf" id="2_bold"]
+[ext_resource type="FontFile" uid="uid://krr6xb15eir1" path="res://assets/fonts/PixeloidSans.otf" id="3_reg"]
+[ext_resource type="Texture2D" uid="uid://c1ogfdb1ouesk" path="res://assets/textures/green_ship.png" id="4_ship"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_slot"]
+content_margin_left = 24.0
+content_margin_top = 18.0
+content_margin_right = 24.0
+content_margin_bottom = 20.0
+bg_color = Color(0.08, 0.09, 0.13, 0.88)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.5, 1, 0.8, 0.5)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[node name="SetupSlot" type="PanelContainer"]
+custom_minimum_size = Vector2(380, 400)
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot")
+script = ExtResource("1_slot")
+
+[node name="Content" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="Header" type="Label" parent="Content"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_bold")
+theme_override_font_sizes/font_size = 30
+text = "PLAYER 1"
+horizontal_alignment = 1
+
+[node name="Device" type="Label" parent="Content"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.72, 0.68, 1)
+theme_override_fonts/font = ExtResource("3_reg")
+theme_override_font_sizes/font_size = 15
+text = "WASD + SPACE"
+horizontal_alignment = 1
+
+[node name="ShipHolder" type="Control" parent="Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+
+[node name="Ship" type="TextureRect" parent="Content/ShipHolder"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 140.0
+offset_bottom = 140.0
+pivot_offset = Vector2(70, 70)
+texture = ExtResource("4_ship")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ColorName" type="Label" parent="Content"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_bold")
+theme_override_font_sizes/font_size = 28
+text = "MINT"
+horizontal_alignment = 1
+
+[node name="Swatches" type="HBoxContainer" parent="Content"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Status" type="Label" parent="Content"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_bold")
+theme_override_font_sizes/font_size = 20
+text = "PRESS SPACE TO READY"
+horizontal_alignment = 1
+
+[node name="JoinPrompt" type="Label" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.88, 0.82, 1)
+theme_override_fonts/font = ExtResource("2_bold")
+theme_override_font_sizes/font_size = 26
+text = "PRESS ENTER
+TO JOIN"
+horizontal_alignment = 1
+vertical_alignment = 1

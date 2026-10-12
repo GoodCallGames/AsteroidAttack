@@ -1,0 +1,104 @@
+[gd_scene format=3 uid="uid://cwtm13ws3ca17"]
+
+[ext_resource type="Script" uid="uid://2vdyybbm1rju" path="res://scripts/collection_area.gd" id="1_jfbh3"]
+[ext_resource type="AudioStream" path="res://assets/audio/collect.wav" id="2_2eubv"]
+[ext_resource type="Texture2D" uid="uid://bxs6mur5ogyl8" path="res://assets/textures/circle_particle.png" id="3_cbl4u"]
+[ext_resource type="FontFile" uid="uid://urot3nto57vw" path="res://assets/fonts/PixeloidSans-Bold.otf" id="9_tagfont"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
+radius = 152.52664
+
+[sub_resource type="Curve" id="Curve_d0u6y"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_57qmd"]
+curve = SubResource("Curve_d0u6y")
+
+[sub_resource type="Curve" id="Curve_pp7xx"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.99999, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_yf5fn"]
+curve = SubResource("Curve_pp7xx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_g4v7s"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 1.5
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_yf5fn")
+color = Color(0.9498333, 0.57, 1, 1)
+alpha_curve = SubResource("CurveTexture_57qmd")
+
+[sub_resource type="Gradient" id="Gradient_glow"]
+colors = PackedColorArray(0.85, 0.45, 1, 0.5, 0.85, 0.45, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_glow"]
+gradient = SubResource("Gradient_glow")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="Gradient" id="Gradient_mote"]
+offsets = PackedFloat32Array(0, 0.25, 1)
+colors = PackedColorArray(0.95, 0.6, 1, 0, 0.95, 0.6, 1, 0.9, 0.95, 0.6, 1, 0)
+
+[sub_resource type="Curve" id="Curve_mote"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.2), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="CollectionArea" type="Area2D" unique_id=2124246774 groups=["collection_area"]]
+script = ExtResource("1_jfbh3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=270214681]
+shape = SubResource("CircleShape2D_g4v7s")
+
+[node name="CollectSound" type="AudioStreamPlayer2D" parent="." unique_id=1162525497]
+stream = ExtResource("2_2eubv")
+
+[node name="Glow" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.45)
+scale = Vector2(1.8, 1.8)
+texture = SubResource("GradientTexture2D_glow")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1078336382]
+amount = 4
+texture = ExtResource("3_cbl4u")
+lifetime = 2.0
+preprocess = 2.0
+process_material = SubResource("ParticleProcessMaterial_g4v7s")
+
+[node name="Motes" type="CPUParticles2D" parent="."]
+amount = 22
+texture = ExtResource("3_cbl4u")
+lifetime = 1.5
+preprocess = 1.5
+emission_shape = 2
+emission_sphere_radius = 210.0
+gravity = Vector2(0, 0)
+radial_accel_min = -170.0
+radial_accel_max = -110.0
+scale_amount_min = 0.06
+scale_amount_max = 0.14
+scale_amount_curve = SubResource("Curve_mote")
+color_ramp = SubResource("Gradient_mote")
+
+
+[node name="ZoneTag" type="Label" parent="."]
+offset_left = -220.0
+offset_top = -272.0
+offset_right = 220.0
+offset_bottom = -216.0
+theme_override_colors/font_color = Color(0.95, 0.6, 1, 0.85)
+theme_override_colors/font_outline_color = Color(0.08, 0.04, 0.12, 0.7)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("9_tagfont")
+theme_override_font_sizes/font_size = 40
+text = "COLLECTION ZONE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

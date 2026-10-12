@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://cvhty6unj6v6s"]
+
+[ext_resource type="Texture2D" uid="uid://c1ogfdb1ouesk" path="res://assets/textures/green_ship.png" id="1_3vyb7"]
+[ext_resource type="Script" uid="uid://dxo4lurlij5fc" path="res://scripts/player.gd" id="1_g2els"]
+[ext_resource type="AudioStream" path="res://assets/audio/ufo-flight-loop.wav" id="5_hum"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_6mo6b"]
+bounce = 0.5
+
+[sub_resource type="Curve" id="Curve_sparkle"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_sparkle"]
+colors = PackedColorArray(0.85, 1, 0.92, 1, 0.5, 1, 0.75, 0)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g4v7s"]
+radius = 37.0
+height = 124.0
+
+[node name="Player" type="RigidBody2D" unique_id=1136005801 groups=["player"]]
+z_index = 100
+physics_material_override = SubResource("PhysicsMaterial_6mo6b")
+gravity_scale = 0.0
+linear_damp = 1.0
+contact_monitor = true
+max_contacts_reported = 4
+script = ExtResource("1_g2els")
+
+[node name="Ship" type="Sprite2D" parent="." unique_id=720974723]
+texture = ExtResource("1_3vyb7")
+
+[node name="Trail" type="CPUParticles2D" parent="." unique_id=1827364501]
+z_index = -1
+emitting = false
+amount = 24
+lifetime = 0.7
+emission_shape = 1
+emission_sphere_radius = 18.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 50.0
+scale_amount_min = 3.0
+scale_amount_max = 6.0
+scale_amount_curve = SubResource("Curve_sparkle")
+color_ramp = SubResource("Gradient_sparkle")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2058955575]
+shape = SubResource("CapsuleShape2D_g4v7s")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1414989951]
+process_callback = 0
+zoom = Vector2(0.6, 0.6)
+limit_left = -1650
+limit_top = -1650
+limit_right = 1650
+limit_bottom = 1650
+limit_smoothed = true
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+
+[node name="ThrustSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_hum")

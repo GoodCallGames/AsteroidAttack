@@ -1,0 +1,240 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/objective_banner.gd" id="1_banner"]
+[ext_resource type="FontFile" uid="uid://urot3nto57vw" path="res://assets/fonts/PixeloidSans-Bold.otf" id="2_bold"]
+[ext_resource type="FontFile" uid="uid://krr6xb15eir1" path="res://assets/fonts/PixeloidSans.otf" id="3_reg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+content_margin_left = 36.0
+content_margin_top = 12.0
+content_margin_right = 30.0
+content_margin_bottom = 14.0
+bg_color = Color(0.08, 0.09, 0.13, 0.82)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.5, 1, 0.8, 0.55)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cap"]
+content_margin_left = 12.0
+content_margin_top = 3.0
+content_margin_right = 12.0
+content_margin_bottom = 5.0
+bg_color = Color(0.16, 0.18, 0.25, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 4
+border_color = Color(0.5, 1, 0.8, 0.5)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="ObjectiveBanner" type="CanvasLayer"]
+layer = 12
+script = ExtResource("1_banner")
+
+[node name="Root" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Panel" type="PanelContainer" parent="Root"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_bottom = -28.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="VBox" type="VBoxContainer" parent="Root/Panel"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 4
+
+[node name="Eyebrow" type="Label" parent="Root/Panel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5, 1, 0.8, 1)
+theme_override_fonts/font = ExtResource("2_bold")
+theme_override_font_sizes/font_size = 18
+text = "OBJECTIVE"
+horizontal_alignment = 1
+
+[node name="Title" type="Label" parent="Root/Panel/VBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_bold")
+theme_override_font_sizes/font_size = 34
+text = "COLLECT ALL THE ASTEROIDS"
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="Root/Panel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.88, 0.82, 1)
+theme_override_fonts/font = ExtResource("3_reg")
+theme_override_font_sizes/font_size = 20
+text = "Push them into the purple zone before time runs out"
+horizontal_alignment = 1
+
+[node name="Divider" type="ColorRect" parent="Root/Panel/VBox"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.5, 1, 0.8, 0.25)
+
+[node name="Controls" type="HBoxContainer" parent="Root/Panel/VBox"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="MoveLabel" type="Label" parent="Root/Panel/VBox/Controls"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.93, 0.9, 1)
+theme_override_fonts/font = ExtResource("2_bold")
+theme_override_font_sizes/font_size = 20
+text = "MOVE"
+
+[node name="Cap1" type="PanelContainer" parent="Root/Panel/VBox/Controls"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cap")
+
+[node name="Label" type="Label" parent="Root/Panel/VBox/Controls/Cap1"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_bold")
+theme_override_font_sizes/font_size = 20
+text = "WASD"
+
+[node name="Or1" type="Label" parent="Root/Panel/VBox/Controls"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.72, 0.68, 1)
+theme_override_fonts/font = ExtResource("3_reg")
+theme_override_font_sizes/font_size = 18
+text = "or"
+
+[node name="Cap2" type="PanelContainer" parent="Root/Panel/VBox/Controls"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cap")
+
+[node name="Label" type="Label" parent="Root/Panel/VBox/Controls/Cap2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_bold")
+theme_override_font_sizes/font_size = 20
+text = "ARROWS"
+
+[node name="Or2" type="Label" parent="Root/Panel/VBox/Controls"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.72, 0.68, 1)
+theme_override_fonts/font = ExtResource("3_reg")
+theme_override_font_sizes/font_size = 18
+text = "or"
+
+[node name="Cap3" type="PanelContainer" parent="Root/Panel/VBox/Controls"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cap")
+
+[node name="Label" type="Label" parent="Root/Panel/VBox/Controls/Cap3"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_bold")
+theme_override_font_sizes/font_size = 20
+text = "LEFT STICK"
+
+[node name="CoopControls" type="VBoxContainer" parent="Root/Panel/VBox"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 4
+
+[node name="P1" type="Label" parent="Root/Panel/VBox/CoopControls"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5, 1, 0.75, 1)
+theme_override_fonts/font = ExtResource("2_bold")
+theme_override_font_sizes/font_size = 20
+text = "P1   WASD to move   |   SPACE to pulse"
+horizontal_alignment = 1
+
+[node name="P2" type="Label" parent="Root/Panel/VBox/CoopControls"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.65, 0.42, 1)
+theme_override_fonts/font = ExtResource("2_bold")
+theme_override_font_sizes/font_size = 20
+text = "P2   ARROWS to move   |   ENTER to pulse"
+horizontal_alignment = 1
+
+[node name="Hint" type="Label" parent="Root/Panel/VBox/CoopControls"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.72, 0.68, 1)
+theme_override_fonts/font = ExtResource("3_reg")
+theme_override_font_sizes/font_size = 16
+text = "Controllers work too. Plug them in and play."
+horizontal_alignment = 1
+
+[node name="Controls2" type="HBoxContainer" parent="Root/Panel/VBox"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="PulseLabel" type="Label" parent="Root/Panel/VBox/Controls2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.5, 1, 1)
+theme_override_fonts/font = ExtResource("2_bold")
+theme_override_font_sizes/font_size = 20
+text = "PULSE BLAST"
+
+[node name="CapSpace" type="PanelContainer" parent="Root/Panel/VBox/Controls2"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cap")
+
+[node name="Label" type="Label" parent="Root/Panel/VBox/Controls2/CapSpace"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_bold")
+theme_override_font_sizes/font_size = 20
+text = "SPACE"
+
+[node name="OrP" type="Label" parent="Root/Panel/VBox/Controls2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.72, 0.68, 1)
+theme_override_fonts/font = ExtResource("3_reg")
+theme_override_font_sizes/font_size = 18
+text = "or"
+
+[node name="CapA" type="PanelContainer" parent="Root/Panel/VBox/Controls2"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cap")
+
+[node name="Label" type="Label" parent="Root/Panel/VBox/Controls2/CapA"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_bold")
+theme_override_font_sizes/font_size = 20
+text = "A BUTTON"
+
+[node name="GoldTip" type="Label" parent="Root/Panel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.82, 0.3, 1)
+theme_override_fonts/font = ExtResource("2_bold")
+theme_override_font_sizes/font_size = 20
+text = "GOLD ASTEROIDS GIVE BONUS TIME"
+horizontal_alignment = 1

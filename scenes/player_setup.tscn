@@ -1,0 +1,167 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/player_setup.gd" id="1_setup"]
+[ext_resource type="PackedScene" path="res://scenes/setup_slot.tscn" id="2_slot"]
+[ext_resource type="FontFile" uid="uid://urot3nto57vw" path="res://assets/fonts/PixeloidSans-Bold.otf" id="3_bold"]
+[ext_resource type="FontFile" uid="uid://krr6xb15eir1" path="res://assets/fonts/PixeloidSans.otf" id="4_reg"]
+[ext_resource type="AudioStream" path="res://assets/audio/tick.wav" id="5_tick"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_primary"]
+content_margin_left = 40.0
+content_margin_top = 12.0
+content_margin_right = 40.0
+content_margin_bottom = 14.0
+bg_color = Color(0.85, 0.45, 1, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_primary_hover"]
+content_margin_left = 40.0
+content_margin_top = 12.0
+content_margin_right = 40.0
+content_margin_bottom = 14.0
+bg_color = Color(0.93, 0.6, 1, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 1, 1, 0.9)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_secondary"]
+content_margin_left = 40.0
+content_margin_top = 10.0
+content_margin_right = 40.0
+content_margin_bottom = 12.0
+bg_color = Color(0.1, 0.12, 0.18, 0.9)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.5, 1, 0.8, 0.5)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_secondary_hover"]
+content_margin_left = 40.0
+content_margin_top = 10.0
+content_margin_right = 40.0
+content_margin_bottom = 12.0
+bg_color = Color(0.18, 0.24, 0.3, 0.95)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.5, 1, 0.8, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+
+[node name="PlayerSetup" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_setup")
+
+[node name="Dim" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.03, 0.04, 0.08, 0.6)
+
+[node name="Center" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Column" type="VBoxContainer" parent="Center"]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="Title" type="Label" parent="Center/Column"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5, 1, 0.8, 1)
+theme_override_colors/font_outline_color = Color(0.05, 0.08, 0.1, 0.9)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_bold")
+theme_override_font_sizes/font_size = 52
+text = "PLAYER SETUP"
+horizontal_alignment = 1
+
+[node name="Slots" type="HBoxContainer" parent="Center/Column"]
+layout_mode = 2
+theme_override_constants/separation = 36
+alignment = 1
+
+[node name="Slot1" parent="Center/Column/Slots" instance=ExtResource("2_slot")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Slot2" parent="Center/Column/Slots" instance=ExtResource("2_slot")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Buttons" type="HBoxContainer" parent="Center/Column"]
+layout_mode = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="Back" type="Button" parent="Center/Column/Buttons"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+theme_override_colors/font_color = Color(0.85, 0.95, 0.9, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_bold")
+theme_override_font_sizes/font_size = 26
+theme_override_styles/hover = SubResource("StyleBoxFlat_secondary_hover")
+theme_override_styles/normal = SubResource("StyleBoxFlat_secondary")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_secondary_hover")
+text = "BACK"
+
+[node name="Start" type="Button" parent="Center/Column/Buttons"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+theme_override_colors/font_color = Color(0.1, 0.05, 0.15, 1)
+theme_override_colors/font_hover_color = Color(0.1, 0.05, 0.15, 1)
+theme_override_colors/font_pressed_color = Color(0.1, 0.05, 0.15, 1)
+theme_override_fonts/font = ExtResource("3_bold")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/hover = SubResource("StyleBoxFlat_primary_hover")
+theme_override_styles/normal = SubResource("StyleBoxFlat_primary")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_primary_hover")
+text = "START"
+
+[node name="Hint" type="Label" parent="Center/Column"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.72, 0.68, 1)
+theme_override_fonts/font = ExtResource("4_reg")
+theme_override_font_sizes/font_size = 17
+text = "LEFT / RIGHT  change colour     SPACE / ENTER / A  ready     ESC  back"
+horizontal_alignment = 1
+
+[node name="Tick" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("5_tick")

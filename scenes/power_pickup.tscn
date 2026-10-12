@@ -1,0 +1,24 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/power_pickup.gd" id="1_pickup"]
+[ext_resource type="FontFile" uid="uid://urot3nto57vw" path="res://assets/fonts/PixeloidSans-Bold.otf" id="2_bold"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pickup"]
+radius = 52.0
+
+[node name="PowerPickup" type="Area2D"]
+z_index = 40
+script = ExtResource("1_pickup")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_pickup")
+
+[node name="Name" type="Label" parent="."]
+offset_left = -130.0
+offset_top = 68.0
+offset_right = 130.0
+offset_bottom = 104.0
+theme_override_fonts/font = ExtResource("2_bold")
+theme_override_font_sizes/font_size = 26
+text = "POWER"
+horizontal_alignment = 1
